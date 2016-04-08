@@ -45,19 +45,19 @@ util.inherits(PatternMatch, Transform);
 // Implement a single method called _transform.
 PatternMatch.prototype._transform = function (chunk, encoding, getNextChunk){
   this._inputBuffer += chunk;
-  console.log("Current buffer: " + this._inputBuffer);
+//  console.log("Current buffer: " + this._inputBuffer);
 
   var match = this._pattern.exec(this._inputBuffer);
   
   while (match) {
-    console.log(match);
+  //  console.log(match);
     //Get the part before the match and save it.
     var result = this._inputBuffer.substring(0, match.index);
     //Remove the match from the buffer.
     this._inputBuffer = this._inputBuffer.substring(match.index+1, this._inputBuffer.length);
 
-    console.log("result: " + result);
-    console.log("remainder: " + this._inputBuffer);
+    //console.log("result: " + result);
+    //console.log("remainder: " + this._inputBuffer);
     //Return the match.
     this.push(result.trim());
     //Find next match.
@@ -69,7 +69,6 @@ PatternMatch.prototype._transform = function (chunk, encoding, getNextChunk){
 //After stream has been read and transformed, the _flush method is called ( output stream and clean up existing data)
 PatternMatch.prototype._flush = function (flushCompleted) {
   
-
   //clean up the interval buffer.
   this.inputBuffer = "";
 
@@ -107,7 +106,7 @@ patternStream.on(
     var content = null;
 
     while ( content = this.read()){
-      console.log("content: " + content);
+    //  console.log("content: " + content);
       matches.push(content);
     }
   }
